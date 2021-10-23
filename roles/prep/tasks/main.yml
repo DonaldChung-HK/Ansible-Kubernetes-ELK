@@ -1,0 +1,18 @@
+- name: Test K8s service is contactable.
+  kubernetes.core.k8s_cluster_info:
+
+- name: Set storage class for PV claim
+  kubernetes.core.k8s:
+    state: present
+    src: "{{ role_path }}/files/{{ storage_class_file }}"
+
+- name: Create the namespace for ELK stack
+  kubernetes.core.k8s:
+    name: "{{ deployment_namespace }}"
+    kind: Namespace
+    state: present
+
+- name: Install elastic helm repo
+  kubernetes.core.helm_repository:
+    name: elastic
+    repo_url: https://helm.elastic.co/

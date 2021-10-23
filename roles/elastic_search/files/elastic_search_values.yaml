@@ -1,0 +1,33 @@
+---
+
+image: "docker.elastic.co/elasticsearch/elasticsearch"
+
+imagePullPolicy: "IfNotPresent"
+
+podAnnotations: {}
+
+esJavaOpts: "-Xmx1g -Xms1g"
+
+resources:
+
+  requests:
+
+    cpu: "100m"
+
+    memory: "2Gi"
+
+  limits:
+
+    cpu: "1000m"
+
+    memory: "2Gi"
+
+# disabled xpack security warning
+esConfig: 
+  elasticsearch.yml: |
+    xpack.security.enabled: false
+
+# Permit co-located instances for solitary minikube virtual machines.
+antiAffinity: "soft"
+
+

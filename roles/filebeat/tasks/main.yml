@@ -1,0 +1,27 @@
+- name: Install pre-set version of filebeat to send logs directly to elastic
+  kubernetes.core.helm:
+    chart_ref: elastic/filebeat
+    create_namespace: yes
+    update_repo_cache: yes
+    # Pulled from default
+    name: "filebeat"
+    release_namespace: "{{ deployment_namespace }}"
+    release_values:
+      imageTag: "{{ image_version }}"
+    values_files:
+      - "{{ role_path }}/files/filebeat_values.yaml"
+  when: deploy_with_logstash == false
+
+- name: Install pre-set version of logstash send logs to logstash if deploy_with_logstash is true
+  kubernetes.core.helm:
+    chart_ref: elastic/filebeat
+    create_namespace: yes
+    update_repo_cache: yes
+    # Pulled from default
+    name: "filebeat"
+    release_namespace: "{{ deployment_namespace }}"
+    release_values:
+      imageTag: "{{ image_version }}"
+    values_files:
+      - "{{ role_path }}/files/filebeat_values_with_logstash.yaml"
+  when: deploy_with_logstash == true

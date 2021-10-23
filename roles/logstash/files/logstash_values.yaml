@@ -1,0 +1,38 @@
+image: "docker.elastic.co/logstash/logstash"
+
+imagePullPolicy: "IfNotPresent"
+
+
+##edit or remove pipeline here
+logstashPipeline:
+  logstash.conf: |
+    input {
+      beats {
+        port => 5044
+      }
+    }
+    filter {
+
+    }
+    output {
+      elasticsearch {
+        hosts => ["elasticsearch-master:9200"]
+        manage_template => false
+        index => "%{[@metadata][beat]}-logstash-%{+YYYY.MM.dd}"
+      }
+    }
+
+persistence:
+  enabled: true
+  storageClass: "local-path"
+  accessMode: ReadWriteOnce
+  size: 2Gi
+
+#enable service for beats to push logs to
+service:
+  type: ClusterIP
+  ports:
+    - name: beats
+      port: 5044
+      protocol: TCP
+      targetPort: 5044

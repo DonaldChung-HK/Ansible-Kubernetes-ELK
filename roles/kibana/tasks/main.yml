@@ -1,0 +1,12 @@
+- name: Install pre-set version of kibana
+  kubernetes.core.helm:
+    chart_ref: elastic/kibana
+    create_namespace: yes
+    update_repo_cache: yes
+    # Pulled from default
+    name: "kibana"
+    release_namespace: "{{ deployment_namespace }}"
+    release_values:
+      imageTag: "{{ image_version }}"
+    values_files:
+      - "{{ role_path }}/files/kibana_values.yaml"

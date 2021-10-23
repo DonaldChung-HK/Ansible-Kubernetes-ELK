@@ -1,0 +1,45 @@
+image: "docker.elastic.co/beats/filebeat"
+
+imageTag: "7.15.1"
+
+imagePullPolicy: "IfNotPresent"
+
+daemonset:
+  filebeatConfig:
+    filebeat.yml: |
+      filebeat.inputs:
+      - type: container
+        paths:
+          - /var/log/containers/*.log
+        processors:
+        - add_kubernetes_metadata:
+            host: ${NODE_NAME}
+            matchers:
+            - logs_path:
+                logs_path: "/var/log/containers/"
+      output.logstash:
+        hosts: ["logstash-logstash:5044"]
+
+deployment:
+  filebeatConfig:
+    filebeat.yml: |
+      filebeat.inputs:
+        - type: log
+          paths:
+            - /usr/share/filebeat/logs/filebeat
+      output.logstash:
+        hosts: ["logstash-logstash:5044"]
+
+resources:
+
+  requests:
+
+    cpu: "100m"
+
+    memory: "100Mi"
+
+  limits:
+
+    cpu: "1000m"
+
+    memory: "200Mi"

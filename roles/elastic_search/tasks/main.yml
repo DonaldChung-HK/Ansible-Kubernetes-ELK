@@ -1,0 +1,21 @@
+- name: Install pre-set version of elasticsearch
+  kubernetes.core.helm:
+    chart_ref: elastic/elasticsearch
+    create_namespace: yes
+    update_repo_cache: yes
+    # Pulled from default
+    name: "elasticsearch"
+    release_namespace: "{{ deployment_namespace }}"
+    release_values:
+      imageTag: "{{ image_version }}"
+      replicas: "{{ elasticsearch_replica }}"
+      minimumMasterNodes: "{{ min_master_node }}"
+      # Request smaller persistent volumes.
+      volumeClaimTemplate:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: "{{ storage_class_name }}"
+        resources:
+          requests:
+            storage: "{{ elastic_storage }}"
+    values_files:
+      - "{{ role_path }}/files/elastic_search_values.yaml"

@@ -1,0 +1,40 @@
+- hosts: localhost # Kubectl is configured from this machine
+  roles:
+    - prep
+    - elastic_search
+    - kibana
+    - logstash
+    - filebeat
+  vars:
+    #Global
+    # namespace to deploy the elastic stack
+    deployment_namespace: "logs"
+
+    # deploy logstash with ELK stack for functions that are exclusive for logstash 
+    #  false: filebeat will send logs directly to elasticsearch
+    #  true: filebeat will forward logs to logstash and allows filters to be configured
+    deploy_with_logstash: true
+
+    # PV storage class name
+    storage_class_name: "local-path"
+    # place storage provider class for PV claim in /roles/prep/files
+    storage_class_file: "local-path-storage.yaml"
+
+    # All component in stack will use the same version to avoid compatibility issue
+    image_version: "7.15.1"
+
+    #Elastic Search
+    # Number of elastic search replicas to deploy
+    elasticsearch_replica: 3
+    # minimum number of master node
+    min_master_node: 2
+    # PV Size
+    elastic_storage: 30Gi
+
+    #Logstash
+    # Number of logstash replicas to deploy
+    logstash_replica: 1
+    logstash_storage: 5Gi
+
+    
+

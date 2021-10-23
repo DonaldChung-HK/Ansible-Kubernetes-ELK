@@ -1,0 +1,19 @@
+- name: Install pre-set version of logstash if deploy_with_logstash is true
+  kubernetes.core.helm:
+    chart_ref: elastic/logstash
+    create_namespace: yes
+    update_repo_cache: yes
+    # Pulled from default
+    name: "logstash"
+    release_namespace: "{{ deployment_namespace }}"
+    release_values:
+      imageTag: "{{ image_version }}"
+      replicas: "{{ logstash_replica }}"
+      persistence:
+        enabled: true
+        storageClass: "{{ storage_class_name }}"
+        accessMode: ReadWriteOnce
+        size: "{{ logstash_storage }}"
+    values_files:
+      - "{{ role_path }}/files/logstash_values.yaml"
+  when: deploy_with_logstash == true
