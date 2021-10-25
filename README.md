@@ -26,6 +26,8 @@ ELK stack is a popular choice for open-sourced log management. Deploying an ELK 
 	- [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 	- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
 - Setup `$KUBECONFIG` for kubernetes cluster access
+- Install Ansible requirements
+	- `ansible-galaxy collection install -r requirements.yml`
 - Place a yaml file storage provider of your Kubernetes cluster in `/roles/prep/files/`
 
 ## Parameters
