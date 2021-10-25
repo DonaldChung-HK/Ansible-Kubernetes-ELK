@@ -22,12 +22,6 @@ logstashPipeline:
       }
     }
 
-persistence:
-  enabled: true
-  storageClass: "local-path"
-  accessMode: ReadWriteOnce
-  size: 2Gi
-
 #enable service for beats to push logs to
 service:
   type: ClusterIP
