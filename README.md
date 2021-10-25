@@ -2,8 +2,6 @@
 In a production environment, Kubernetes is a highly dynamic and distributed environment across multiple machines and containers. This poses a unique challenge for logging and gaining visibility into the system.
 ELK stack is a popular choice for open-sourced log management. Deploying an ELK stack on Kubernetes is very useful for monitoring and log analysis purposes. However, it can be a complex task, and this playbook is designed to streamline this process for rapid deployment of ELK stacks in Kubernetes cluster.
 
-[TOC]
-
 ## Features
 - Deploy entire ELK stacks with a single playbook
 - version management to ensure version consistancy across the stack
