@@ -34,7 +34,7 @@ These can be configured in `playbook.yaml`.
 
 | **Variables** | **Description** | **Default Value**
 | ------------ | ------------ | ------------ |
-| `deployment_namespace`  |  Namespace to deploy the ELK stacks. This will be created automatically dueing deployment if it doesn't exist already. | `logs|
+| `deployment_namespace`  |  Namespace to deploy the ELK stacks. This will be created automatically dueing deployment if it doesn't exist already. | `logs` |
 | `deploy_with_logstash`  | whether to install with logstash (true) or send logs directly form filebeat to elastic search (false). Logstash is usually deployed for log processing features that are not avaliable with filebeat. | `true`  |
 | `storage_class_name` | Name of storage class for PV claims | `"local-path"` | 
 | `storage_class_file` | Name of StorageClass yaml file placed in `/roles/prep/files/`. | `"local-path-storage.yaml"` |
