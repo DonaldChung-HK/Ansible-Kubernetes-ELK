@@ -17,14 +17,16 @@ ELK stack is a popular choice for open-sourced log management. Deploying an ELK 
 		- setuptools-rust
 		- openshift
 - kubectl
+- Helm 3
 - Persistent Volumes and Load Balancer provider on K8s Cluster
 
 ## Preperation
 - Install python 3 and required packages 
 	- `pip3 install ansible setuptools setuptools-rust openshift`
-- Install ansible and kubectl
+- Install ansible, kubectl and helm 3
 	- [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 	- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
+	- [helm](https://helm.sh/docs/intro/install/)
 - Setup `$KUBECONFIG` for kubernetes cluster access
 - Install Ansible requirements
 	- `ansible-galaxy collection install -r requirements.yml`
