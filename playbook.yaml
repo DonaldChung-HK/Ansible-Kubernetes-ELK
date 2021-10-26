@@ -13,7 +13,7 @@
     # deploy logstash with ELK stack for functions that are exclusive for logstash 
     #  false: filebeat will send logs directly to elasticsearch
     #  true: filebeat will forward logs to logstash and allows filters to be configured
-    deploy_with_logstash: false
+    deploy_with_logstash: true
 
     # PV storage class name
     storage_class_name: "local-path"
@@ -21,7 +21,7 @@
     storage_class_file: "local-path-storage.yaml"
 
     # All component in stack will use the same version to avoid compatibility issue
-    image_version: "7.15.0"
+    image_version: "7.15.1"
 
     #Elastic Search
     # Number of elastic search replicas to deploy
