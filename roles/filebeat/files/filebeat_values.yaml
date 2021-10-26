@@ -2,19 +2,6 @@ image: "docker.elastic.co/beats/filebeat"
 
 imagePullPolicy: "IfNotPresent"
 
-resources:
-
-  requests:
-
-    cpu: "100m"
-
-    memory: "100Mi"
-
-  limits:
-
-    cpu: "1000m"
-
-    memory: "200Mi"
 
 daemonset:
   filebeatConfig:
@@ -30,10 +17,7 @@ daemonset:
             - logs_path:
                 logs_path: "/var/log/containers/"
       output.elasticsearch:
-        host: '${NODE_NAME}'
-        hosts: '${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}'
-        username: '${ELASTICSEARCH_USERNAME}'
-        password: '${ELASTICSEARCH_PASSWORD}'
+        hosts: ["elasticsearch-master:9200"]
 
 deployment:
   filebeatConfig:
@@ -43,7 +27,18 @@ deployment:
           paths:
             - /usr/share/filebeat/logs/filebeat
       output.elasticsearch:
-        host: "${NODE_NAME}"
-        hosts: "${ELASTICSEARCH_HOSTS:elasticsearch-master:9200}"
-        username: "${ELASTICSEARCH_USERNAME}"
-        password: "${ELASTICSEARCH_PASSWORD}"
+        hosts: ["elasticsearch-master:9200"]
+
+resources:
+
+  requests:
+
+    cpu: "100m"
+
+    memory: "100Mi"
+
+  limits:
+
+    cpu: "1000m"
+
+    memory: "200Mi"
