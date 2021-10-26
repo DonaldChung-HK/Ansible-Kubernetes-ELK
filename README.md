@@ -74,5 +74,8 @@ logstash options can be modiflied in `/role/logstash/files/logstash_values.yml` 
 | ------------ | ------------ |
 | `logstashPipeline: logstash.conf:`|   Config file for logstash pipeline such as filters for incomming logs |
 
+## Installing ELK stack
+Set current directory to the repository and run `ansible-playbook playbook.yaml`
+
 ## Post-installations
 To connect to Kibana dashboard, check the external IP using `kubectl get services -A` and open `http://<externam-ip-of-kibana>:5601`
